@@ -1,5 +1,6 @@
 package com.example.FrankySabado.servicios;
 
+import com.example.FrankySabado.ayudas.MensajeError;
 import com.example.FrankySabado.modelos.Estudiante;
 import com.example.FrankySabado.modelos.dtos.EstudianteDTO;
 import com.example.FrankySabado.modelos.mapas.IMapaEstudiante;
@@ -22,7 +23,7 @@ public class EstudianteServicio {
         try {
             return this.mapa.convertirModeloADto(this.repositorio.save(datosEstudiante));
         } catch (Exception error) {
-            throw new Exception("Error" + error.getMessage());
+            throw new Exception(MensajeError.ERROR_GENERAL_API.getDescripcion() + error.getMessage());
 
         }
     }
@@ -35,11 +36,11 @@ public class EstudianteServicio {
             if (estudianteEncontrado.isPresent()) {
                 return this.mapa.convertirModeloADto(estudianteEncontrado.get());
             } else {
-                throw new Exception("No Encontrado");
+                throw new Exception(MensajeError.USUARIO_NO_ENCONTRADO.getDescripcion());
             }
 
         } catch (Exception error) {
-            throw new Exception("Error" + error.getMessage());
+            throw new Exception(MensajeError.ERROR_GENERAL_API.getDescripcion() + error.getMessage());
         }
 
     }
@@ -50,7 +51,7 @@ public class EstudianteServicio {
         try {
             return this.mapa.convertirListaADto(this.repositorio.findAll());
         } catch (Exception error) {
-            throw new Exception("Error" + error.getMessage());
+            throw new Exception(MensajeError.ERROR_GENERAL_API.getDescripcion() + error.getMessage());
         }
     }
 
@@ -60,7 +61,7 @@ public class EstudianteServicio {
         try {
             return this.mapa.convertirListaADto(this.repositorio.findByPromedio(promedio));
         } catch (Exception error) {
-            throw new Exception("Error" + error.getMessage());
+            throw new Exception(MensajeError.ERROR_GENERAL_API.getDescripcion() + error.getMessage());
         }
 
     }
